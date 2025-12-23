@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 
 // Load environment variables for CLI operations
 // (NestJS @nestjs/config only loads env during app runtime, CLI needs dotenv)
-dotenv.config();
+dotenv.config({ path: `.env.${process.env.NODE_ENV || 'development'}` });
 
 export default new DataSource({
   type: 'postgres',

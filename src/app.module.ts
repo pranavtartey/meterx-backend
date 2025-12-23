@@ -13,6 +13,7 @@ import { LoggingInterceptor } from './common/interceptors/logging.interceptor.js
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor.js';
+import { UsersModule } from './modules/users/users.module.js';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
     }),
 
     // Feature modules will be added here
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [
