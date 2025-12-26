@@ -1,38 +1,40 @@
 import { 
-    Entity, 
-    PrimaryGeneratedColumn, 
-    Column, 
-    CreateDateColumn, 
-    UpdateDateColumn 
+  Entity, 
+  PrimaryGeneratedColumn, 
+  Column, 
+  CreateDateColumn, 
+  UpdateDateColumn,
+  Index,
 } from 'typeorm';
 
 @Entity('users')
+@Index('idx_user_wallet_address',['walletAddress'], { unique: true, where: 'wallet_address IS NOT NULL' }) // Add unique index
 export class User {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+@PrimaryGeneratedColumn('uuid')
+id: string;
 
-  @Column({ unique: true })
-  email: string;
+@Column({ unique: true })
+email: string;
 
-  @Column({ name: 'password_hash', nullable: true })
-  passwordHash: string;
+@Column({ name: 'password_hash', nullable: true })
+passwordHash: string;
 
-  @Column({
-    type: 'enum',
-    enum: ['PROVIDER', 'CONSUMER', 'ADMIN'],
-    default: 'CONSUMER',
-  })
-  role: 'PROVIDER' | 'CONSUMER' | 'ADMIN';
+@Column({
+  type: 'enum',
+  enum: ['PROVIDER', 'CONSUMER', 'ADMIN'],
+  default: 'CONSUMER',
+})
+role: 'PROVIDER' | 'CONSUMER' | 'ADMIN';
 
-  @Column({ name: 'wallet_address', nullable: true })
-  walletAddress: string;
+@Column({ name: 'wallet_address', nullable: true })
+walletAddress: string;
 
-  @Column({ name: 'is_active', default: true })
-  isActive: boolean;
+@Column({ name: 'is_active', default: true })
+isActive: boolean;
 
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+@CreateDateColumn({ name: 'created_at' })
+createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
+@UpdateDateColumn({ name: 'updated_at' })
+updatedAt: Date;
 }
