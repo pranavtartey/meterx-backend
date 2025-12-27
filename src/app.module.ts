@@ -14,6 +14,8 @@ import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor.js';
 import { UsersModule } from './modules/users/users.module.js';
+import { AuthModule } from './modules/auth/auth.module.js';
+import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard.js';
 
 @Module({
   imports: [
@@ -47,6 +49,7 @@ import { UsersModule } from './modules/users/users.module.js';
 
     // Feature modules will be added here
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
@@ -60,10 +63,10 @@ import { UsersModule } from './modules/users/users.module.js';
     },
     // Note: JwtAuthGuard and RolesGuard should be applied per-module or controller
     // Uncomment below to make JWT auth global:
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: JwtAuthGuard,
-    // },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
     // {
     //   provide: APP_GUARD,
     //   useClass: RolesGuard,
