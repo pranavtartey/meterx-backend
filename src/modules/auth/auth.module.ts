@@ -16,7 +16,7 @@ import { AuthNonce } from './entities/auth-nonce.entity';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        secret: configService.getOrThrow<string>('jwt.secret'),
+        secret:configService.getOrThrow<string>('jwt.secret'),
         signOptions: {
           expiresIn: `${configService.getOrThrow<number>('jwt.expiresIn')}s`,
         },

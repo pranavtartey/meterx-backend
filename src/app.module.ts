@@ -23,6 +23,7 @@ import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard.js';
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],
+      envFilePath: `.env.${process.env.NODE_ENV || 'development'}`,
     }),
 
     // Context Local Storage (for request-scoped data)
